@@ -46,7 +46,7 @@ window.renderStatistics = function (ctx, names, times) {
 
   for (var i = 0; i < names.length; i++) {
     var currentBarHeight = (BAR_HEIGHT * times[i]) / maxTime;
-    var barColor = names[i] === PLAYER_NAME ? PLAYER_COLOR : 'hsl(240, 100%, ' + Math.floor(Math.random() * 50) + '%)';
+    var barColor = names[i] === PLAYER_NAME ? PLAYER_COLOR : 'hsl(240, 100%, ' + Math.floor(Math.random() * 100) + '%)';
 
     renderText(ctx, Math.floor(times[i]) + '', CLOUD_X + (BAR_WIDTH + BAR_GAP) * i + GAP * 2, CLOUD_Y + GAP * 3 + FONT_SIZE * 2 + BAR_HEIGHT - currentBarHeight);
     ctx.fillStyle = barColor;
