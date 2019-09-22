@@ -1,3 +1,5 @@
+'use strict';
+
 var setup = document.querySelector('.setup');
 var wizardTemplate = document.querySelector('#similar-wizard-template');
 var wizardsList = document.querySelector('.setup-similar-list');
@@ -16,17 +18,17 @@ function getRandomElemFromArray(array) {
 }
 
 function generateMock(length, mockDataSet) {
-  var mocks = [];
+  var wizards = [];
   for (var i = 0; i < length; i++) {
     var mock = {
       name: getRandomElemFromArray(mockDataSet.names) + ' ' + getRandomElemFromArray(mockDataSet.secondNames),
       coatColor: getRandomElemFromArray(mockDataSet.coatColors),
       eyeColor: getRandomElemFromArray(mockDataSet.eyeColors),
     };
-    mocks.push(mock);
+    wizards.push(mock);
   }
 
-  return mocks;
+  return wizards;
 }
 
 function createWizard(mockData, template) {
