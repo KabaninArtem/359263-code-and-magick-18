@@ -1,8 +1,6 @@
 'use strict';
 
 var setup = document.querySelector('.setup');
-var wizardTemplate = document.querySelector('#similar-wizard-template');
-var wizardsList = document.querySelector('.setup-similar-list');
 var similar = document.querySelector('.setup-similar');
 var MOCK_DATA = {
   names: ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'],
@@ -31,8 +29,9 @@ function generateMock(length, mockDataSet) {
   return wizards;
 }
 
-function createWizard(mockData, template) {
-  var element = template.cloneNode(true).content;
+function createWizard(mockData) {
+  var wizardTemplate = document.querySelector('#similar-wizard-template');
+  var element = wizardTemplate.cloneNode(true).content;
   var name = element.querySelector('.setup-similar-label');
   var coat = element.querySelector('.wizard-coat');
   var eyes = element.querySelector('.wizard-eyes');
@@ -42,10 +41,11 @@ function createWizard(mockData, template) {
   return element;
 }
 
-function renderWizard(mocksList, template) {
+function renderWizard(mocksList) {
+  var wizardsList = document.querySelector('.setup-similar-list');
   var fragment = document.createDocumentFragment();
   for (var i = 0, len = mocksList.length; i < len; i++) {
-    var wizardProfile = createWizard(mocksList[i], template);
+    var wizardProfile = createWizard(mocksList[i]);
     fragment.appendChild(wizardProfile);
   }
   wizardsList.appendChild(fragment);
@@ -53,4 +53,4 @@ function renderWizard(mocksList, template) {
 
 setup.classList.remove('hidden');
 similar.classList.remove('hidden');
-renderWizard(mocks, wizardTemplate);
+renderWizard(mocks);
