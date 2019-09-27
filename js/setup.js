@@ -1,6 +1,5 @@
 'use strict';
-
-var setup = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
 var similar = document.querySelector('.setup-similar');
 var MOCK_DATA = {
   names: ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'],
@@ -51,6 +50,12 @@ function renderWizard(mocksList) {
   wizardsList.appendChild(fragment);
 }
 
-setup.classList.remove('hidden');
+setupOpen.addEventListener('click', function () {
+  var setup = document.querySelector('.setup');
+  setup.classList.remove('hidden');
+  console.log('setup - ', setup);
+});
+console.log('setupOpen - ', setupOpen);
+
 similar.classList.remove('hidden');
 renderWizard(mocks);
