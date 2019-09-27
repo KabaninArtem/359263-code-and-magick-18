@@ -1,6 +1,7 @@
 'use strict';
-var setupOpen = document.querySelector('.setup-open');
-var similar = document.querySelector('.setup-similar');
+
+var ENTER_KEYCODE = 13;
+var ESC_KEYCODE = 27;
 var MOCK_DATA = {
   names: ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'],
   secondNames: ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'],
@@ -8,6 +9,11 @@ var MOCK_DATA = {
   eyeColors: ['black', 'red', 'blue', 'yellow', 'green'],
 };
 var MOCK_QUANTITY = 4;
+var setupOpen = document.querySelector('.setup-open');
+var setupOpenIcon = document.querySelector('.setup-open-icon');
+var setupClose = document.querySelector('.setup-close');
+var setup = document.querySelector('.setup');
+var similar = document.querySelector('.setup-similar');
 var mocks = generateMock(MOCK_QUANTITY, MOCK_DATA);
 
 function getRandomElemFromArray(array) {
@@ -50,12 +56,37 @@ function renderWizard(mocksList) {
   wizardsList.appendChild(fragment);
 }
 
-setupOpen.addEventListener('click', function () {
-  var setup = document.querySelector('.setup');
+function openSetup() {
   setup.classList.remove('hidden');
-  console.log('setup - ', setup);
-});
-console.log('setupOpen - ', setupOpen);
+}
 
+
+function onOpenIconEnterPress(evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    openSetup();
+  }
+}
+
+function onOpenIconEscPress(evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closeSetup();
+  }
+}
+
+function closeSetup() {
+  setup.classList.add('hidden');
+}
+
+function onCloseIconEnterPress(evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closeSetup();
+  }
+}
+
+setupOpen.addEventListener('click', openSetup);
+setupOpenIcon.addEventListener('keydown', onOpenIconEnterPress);
+setupClose.addEventListener('click', closeSetup);
+setupClose.addEventListener('keydown', onCloseIconEnterPress);
+document.addEventListener('keydown', onOpenIconEscPress);
 similar.classList.remove('hidden');
 renderWizard(mocks);
