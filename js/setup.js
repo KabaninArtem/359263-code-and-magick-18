@@ -1,6 +1,13 @@
 'use strict';
 
+var DEFAULT_DIALOG_POSITION = {
+  top: '80px',
+  left: '50%',
+};
+
 function openSetup() {
+  setup.style.top = DEFAULT_DIALOG_POSITION.top;
+  setup.style.left = DEFAULT_DIALOG_POSITION.left;
   setup.classList.remove('hidden');
 }
 
