@@ -2,13 +2,20 @@
 
 // Wizards generation
 (function () {
-  function createWizards() {
-    var mocks = window.mock.mocks;
+  var loadWizards = window.backend.load;
+  var getRandomArray = window.util.getRandomArray;
+  var errorHandler = window.util.makeError;
+  var WIZARDS_GET_URL = 'https://js.dump.academy/code-and-magick/data';
+
+  function successHandler(wizards) {
     var fragment = document.createDocumentFragment();
-    for (var i = 0, len = mocks.length; i < len; i++) {
-      var wizardProfile = createWizard(mocks[i]);
+    var wizardsSmall = getRandomArray(wizards);
+    wizardsSmall.length = 4;
+    for (var i = 0, len = wizardsSmall.length; i < len; i++) {
+      var wizardProfile = createWizard(wizardsSmall[i]);
       fragment.appendChild(wizardProfile);
     }
+    renderWizards(fragment);
     return fragment;
   }
 
@@ -24,13 +31,12 @@
     return element;
   }
 
-  function renderWizards() {
+  function renderWizards(wizards) {
     var wizardsListElem = document.querySelector('.setup-similar-list');
-    var wizards = createWizards();
     wizardsListElem.appendChild(wizards);
   }
 
-  renderWizards();
+  loadWizards(WIZARDS_GET_URL, successHandler, errorHandler);
 })();
 
 // Wizard customization
