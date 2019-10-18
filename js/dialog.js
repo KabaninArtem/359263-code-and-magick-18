@@ -3,6 +3,7 @@
 (function () {
   var setupDialogElement = document.querySelector('.setup');
   var dialogHandler = setupDialogElement.querySelector('.upload');
+  var errorHandler = window.util.makeError;
 
   dialogHandler.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -47,5 +48,15 @@
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
+  });
+
+  function successDialogHandler() {
+    setupDialogElement.classList.add('hidden');
+  }
+
+  var form = setupDialogElement.querySelector('.setup-wizard-form');
+  form.addEventListener('submit', function (evt) {
+    window.backend.save(new FormData(form), successDialogHandler, errorHandler);
+    evt.preventDefault();
   });
 })();
